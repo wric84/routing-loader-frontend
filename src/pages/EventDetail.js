@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+
 import { useRouteLoaderData, json, redirect, defer, Await } from "react-router-dom"
 import EventItem from '../components/EventItem'
 import EventsList from "../components/EventsList"
@@ -23,7 +23,7 @@ function EventDetail(){
 
 export default EventDetail
 
-async function laodEvent(id){
+async function loadEvent(id){
     const response = await fetch("http://localhost:8080/events" + id);
   
     if (!response.ok) {
@@ -63,7 +63,7 @@ export async function loader({request, params}){
     const id = params.eventId
     
     return defer({
-        event: await loadEvents(id),
+        event: await loadEvent(id),
         events: loadEvents()
     })
     
